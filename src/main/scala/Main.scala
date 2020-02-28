@@ -7,6 +7,9 @@ object Scala {
 
     val tree = Node(Leaf(1), Node(Leaf(2), Leaf(3)))
     assert(tree.sum == 6)
+
+    val expression = Addition(Subtraction(Number(4), Number(2)), Number(2))
+    assert(expression.eval == 4)
   }
 
   sealed trait IntList {
@@ -30,4 +33,17 @@ object Scala {
   }
   final case class Node(left: Tree, right: Tree) extends Tree
   final case class Leaf(element: Int) extends Tree
+
+  sealed trait Expression {
+    def eval: Double = 
+      this match {
+        case Number(value) => value
+        case Subtraction(l,r) => l.eval - r.eval
+        case Addition(l,r) => l.eval + r.eval
+      }
+  }
+
+  final case class Addition(l: Expression, r: Expression) extends Expression 
+  final case class Subtraction(l: Expression, r: Expression) extends Expression
+  final case class Number(value: Double) extends Expression
 }
