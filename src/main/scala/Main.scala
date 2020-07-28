@@ -14,7 +14,6 @@ object Scala {
     assert(tree.sum == 6)
 
     val expression = Addition(Subtraction(Number(4), Number(2)), Number(2))
-    // assert(expression.eval == 4)
 
     assert(
       Addition(SquareRoot(Number(-1.0)), Number(2.0)).eval == Failure(
